@@ -17,12 +17,12 @@ public abstract class AbsCommands {
         return matcher.matches();
     }
 
-    protected boolean isCurrencyTypeIncorrect(String currencyStr) {
-        boolean typeIncorrect = true;
+    protected boolean isCurrencyTypeCorrect(String currencyStr) {
+        boolean typeIncorrect = false;
 
         for (CurrencyType ct : CurrencyType.values()) {
             if (ct.getAbbreviation().equals(currencyStr)) {
-                typeIncorrect = false;
+                typeIncorrect = true;
             }
         }
         return typeIncorrect;

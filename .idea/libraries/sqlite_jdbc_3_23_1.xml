@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="ojdbc6">
+  <library name="sqlite-jdbc-3.23.1">
     <CLASSES>
-      <root url="jar://D:/1_Projects_program/ojdbc6.jar!/" />
+      <root url="jar://D:/1_Projects_program/sqlite-jdbc-3.23.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

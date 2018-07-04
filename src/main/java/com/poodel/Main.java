@@ -1,57 +1,55 @@
 package com.poodel;
 
-import com.poodel.commands.HelpCommand;
+import com.poodel.commands.*;
+import com.poodel.commands.command_exceptions.CommandDoesNotExistExeption;
 
 import java.util.Scanner;
 
 public class Main {
     private static final String ERROR_MESSAGE = "Error!Command not found!\n Type \"help\" to get list of commands.";
-    HelpCommand helpCommand = new HelpCommand();
+    private HelpCommand helpCommand = new HelpCommand();
+    private AddCommand addCommand = new AddCommand();
+    private ListCommand listCommand = new ListCommand();
+    private ClearCommand clearCommand = new ClearCommand();
+    private TotalCommand totalCommand = new TotalCommand();
+
 
     public static void main (String[] args) {
 
 
 
         Scanner scanner = new Scanner(System.in);
-        String enteredCommand = scanner.next();
+        String enteredCommand = scanner.nextLine();
+      //  System.out.println(enteredCommand);
         Main sd = new Main();
         sd.commandIdentification(enteredCommand);
 
 
     }
-    public void commandIdentification(String enteredCommand) {
+    private void commandIdentification(String enteredCommand) {
 
-//        try {
-//            if (enteredCommand.length() < 3) {
-//                throw new CommandDoesNotExistExeption(ERROR_MESSAGE);
-//            }
+      //  System.out.println(enteredCommand);
+        String[] commandSubStr = enteredCommand.split("\\s");
+
 //
-//         String commandSubStr = enteredCommand.substring(0, 3);
+//        if ("add".equals(commandSubStr[0])) {
+//            addCommand.execute(enteredCommand);
+//        } else if ("help".equals(commandSubStr[0])) {
+//            helpCommand.execute(enteredCommand);
+//            }
+        switch (commandSubStr[0]){
+            case "add" : addCommand.execute(enteredCommand);
+            break;
+            case "help" : helpCommand.execute(enteredCommand);
+            break;
+            case "list" : listCommand.execute(enteredCommand);
+            break;
+            case "clear" : clearCommand.execute(enteredCommand);
+            break;
+            case "total" : totalCommand.execute(enteredCommand);
+            break;
 
-        String commandSubStr = enteredCommand.substring(0, 3);
-
-
-        //                case "add":
-        //                    addCommand.execute(enteredCommand);
-        //                    break;
-        //                case "list":
-        //                    listCommand.execute(enteredCommand);
-        //                    break;
-        //                case "clear":
-        //                    clearCommand.execute(enteredCommand);
-        //                    break;
-        //                case "total":
-        //                    totalCommand.execute(enteredCommand);
-        //                    break;
-        if ("hel".equals(commandSubStr)) {
-            helpCommand.execute(enteredCommand);
-
-        } else if ("exi".equals(commandSubStr)) {
-//                default:
-//                    throw new CommandDoesNotExistExeption(ERROR_MESSAGE);
-        }
-//        } catch (CommandDoesNotExistExeption e) {
-//            System.out.println(ERROR_MESSAGE);
-//        }
+         }
     }
 }
+

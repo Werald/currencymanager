@@ -6,18 +6,30 @@ import java.sql.Statement;
 
 public class TableCreate {
 
-    public static void main(String atgs[]) throws Exception {
-        Class.forName("oracle.jdbc.driver.OracleDriver");
+    public static void createTable(){
+        Connection c = null;
+        Statement stmt = null;
 
-        String url = "jdbc:oracle:thin:@localhost:1521:javaDemo";
-        String username = "root";
-        String password = "root";
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:expenses1.db");
+            System.out.println("Opened database successfully");
 
-        String sql = "CREATE TABLE expenses (id NUMBER(11), amount DOUBLE, currency VARCHAR(3), exp_target VARCHAR(100) )";
-        Connection connection = DriverManager.getConnection(url, username, password);
-        Statement statement = connection.createStatement();
-        statement.execute(sql);
-        connection.close();
+            stmt = c.createStatement();
+            String sql = "CREATE TABLE IF NOT EXISTS EXPENSES" +
+                    "(ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ," +
+                    "DATE DATE NOT NULL, " +
+                    "AMOUNT DOUBLE NOT NULL," +
+                    "CURRENCY CHAR NOT NULL," +
+                    "DESCRIPTION TEXT NOT NULL)";
+
+            stmt.execute(sql);
+            stmt.close();
+            c.close();
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+            System.out.println("db was created successfurry");
     }
-
 }

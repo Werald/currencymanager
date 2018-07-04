@@ -5,6 +5,8 @@ public class TotalCommand extends AbsCommands {
 
     public void execute(String inCommand) {
 
+
+
     }
 
     public String[] getDataArrFromUI(String inCommand) {
