@@ -17,14 +17,13 @@ public class Main {
     public static void main (String[] args) {
 
 
+            Scanner scanner = new Scanner(System.in);
+           do {
+               String enteredCommand = scanner.nextLine();
 
-        Scanner scanner = new Scanner(System.in);
-        String enteredCommand = scanner.nextLine();
-      //  System.out.println(enteredCommand);
-        Main sd = new Main();
-        sd.commandIdentification(enteredCommand);
-
-
+               Main sd = new Main();
+               sd.commandIdentification(enteredCommand);
+           } while (!scanner.next().equals("exit"));
     }
     private void commandIdentification(String enteredCommand) {
 
@@ -47,6 +46,8 @@ public class Main {
             case "clear" : clearCommand.execute(enteredCommand);
             break;
             case "total" : totalCommand.execute(enteredCommand);
+            break;
+            case  "exit" : System.exit(0);
             break;
 
          }
