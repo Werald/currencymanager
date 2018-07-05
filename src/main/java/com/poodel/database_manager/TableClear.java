@@ -39,9 +39,8 @@ public class TableClear {
 //            e.printStackTrace();
 //        }
     }
-    public static void main(String []sd){
-        TableClear da = new TableClear();
-        da.deleteRecord("2017-04-25");
-
-    }
+//    public static void main(String []sd){
+//        TableClear da = new TableClear();
+//        da.deleteRecord("2017-04-25");
+//    }
 }

@@ -42,10 +42,10 @@ public class TableList {
         System.out.println("List void done successfurry");
 
     }
-    public static void main(String sd[]){
-        TableList tableList = new TableList();
-        tableList.displayExpenses();
-    }
+//    public static void main(String sd[]){
+//        TableList tableList = new TableList();
+//        tableList.displayExpenses();
+//    }
 
 }
 

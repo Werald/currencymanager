@@ -33,25 +33,25 @@ public class AddCommand extends AbsCommands {
         return inCommand.split("\\s", 5);
     }
 
-    public static void main(String sd[]){
-        AddCommand addCommand = new AddCommand();
-
-        String [] sds = addCommand.getDataArrFromUI("add 2017-04-25 12 USD Jogurt");
-
-        for (String qwe: sds
-             ) {
-            System.out.println(qwe);
-
-        }
-     System.out.println(addCommand.checkCommand("add 2017-04-25 12 USD Jogurt", COMMAND_PARSER));
-
-        TableInsert tableInsert = new TableInsert();
-
-        System.out.println(addCommand.isCurrencyTypeCorrect("USD"));
-        tableInsert.addRecord(sds[1], sds[2], sds[3], sds[4]);
-
-
-    }
+//    public static void main(String sd[]){
+//        AddCommand addCommand = new AddCommand();
+//
+//        String [] sds = addCommand.getDataArrFromUI("add 2017-04-25 12 USD Jogurt");
+//
+//        for (String qwe: sds
+//             ) {
+//            System.out.println(qwe);
+//
+//        }
+//     System.out.println(addCommand.checkCommand("add 2017-04-25 12 USD Jogurt", COMMAND_PARSER));
+//
+//        TableInsert tableInsert = new TableInsert();
+//
+//        System.out.println(addCommand.isCurrencyTypeCorrect("USD"));
+//        tableInsert.addRecord(sds[1], sds[2], sds[3], sds[4]);
+//
+//
+//    }
 
 }
 

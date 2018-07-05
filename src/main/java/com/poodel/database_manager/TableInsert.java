@@ -32,9 +32,9 @@ public class TableInsert {
 //            e.printStackTrace();
 //        }
     }
-    public static void main(String []sd){
-        TableInsert da = new TableInsert();
-        da.addRecord("2014-04-25", "1442","USD", "Jeeogurt");
-
-    }
+//    public static void main(String []sd){
+//        TableInsert da = new TableInsert();
+//        da.addRecord("2014-04-25", "1442","USD", "Jeeogurt");
+//
+//    }
 }
