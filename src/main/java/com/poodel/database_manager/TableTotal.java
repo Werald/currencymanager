@@ -14,7 +14,8 @@ import java.util.*;
 
 public class TableTotal {
 
-    private static final String URL_TO_SEND = "http://data.fixer.io/api/latest?access_key=1787cfc17beaea6bf7ba65cb4a26aebe";
+    private static final String URL_TO_SEND =
+            "http://data.fixer.io/api/latest?access_key=1787cfc17beaea6bf7ba65cb4a26aebe";
 
     private HashMap<String, Double> getRequiredCoursesFromFixer(String CUR){
         ArrayList<String> currencys = new ArrayList<>(getAbreviatures());
@@ -69,14 +70,16 @@ public class TableTotal {
                 result += temp;
             }
 
-        } catch (NullPointerException e){
+        } catch (Exception e){
+            System.out.println(e.getClass().getName() +"; " + e.getMessage());
+
         }
-        return result;
+        return result/2;
     }
 
 //    [PLN, USD]
 //    {PLN=27.0, USD=1526.0}
-    private HashSet<String> getAbreviatures(){
+    public static HashSet<String> getAbreviatures(){
         HashSet<String> currencys = new HashSet<>();
         HashMap<String, Double> curAmount = new HashMap<>();
 
@@ -145,4 +148,7 @@ public class TableTotal {
     }
 
 
+    public static void main (String []d){
+        System.out.println(getAbreviatures());
+    }
 }

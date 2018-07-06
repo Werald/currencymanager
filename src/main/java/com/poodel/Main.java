@@ -2,6 +2,9 @@ package com.poodel;
 
 import com.poodel.commands.*;
 import com.poodel.commands.command_exceptions.CommandDoesNotExistExeption;
+import com.poodel.database_manager.TableClear;
+import com.poodel.database_manager.TableCreate;
+import com.poodel.database_manager.TableTotal;
 
 import java.util.Scanner;
 
@@ -15,27 +18,18 @@ public class Main {
 
 
     public static void main (String[] args) {
-
-
-            Scanner scanner = new Scanner(System.in);
+        TableCreate.createTable();
            do {
+               Scanner scanner = new Scanner(System.in);
                String enteredCommand = scanner.nextLine();
 
                Main sd = new Main();
                sd.commandIdentification(enteredCommand);
-           } while (!scanner.next().equals("exit"));
+           } while (true);
     }
+
     private void commandIdentification(String enteredCommand) {
-
-      //  System.out.println(enteredCommand);
         String[] commandSubStr = enteredCommand.split("\\s");
-
-//
-//        if ("add".equals(commandSubStr[0])) {
-//            addCommand.execute(enteredCommand);
-//        } else if ("help".equals(commandSubStr[0])) {
-//            helpCommand.execute(enteredCommand);
-//            }
         switch (commandSubStr[0]){
             case "add" : addCommand.execute(enteredCommand);
             break;

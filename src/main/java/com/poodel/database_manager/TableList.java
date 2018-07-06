@@ -19,7 +19,7 @@ public class TableList {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:expenses1.db");
-            c.setAutoCommit(false);
+            c.setAutoCommit(true);
             System.out.println("Opened database successfully");
 
             stmt = c.createStatement();
