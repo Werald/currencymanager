@@ -2,30 +2,35 @@ package com.poodel.database_manager;
 
 import java.sql.*;
 
+/**
+ * Реализация команды "clear", инициируемая классом commands_implementation.ClearCommand
+ * Инстанс класса производит удаление запис(и)-ей из БД, связанных одним значением Date
+ */
 public class TableClear {
 
     private Connection c = null;
     private Statement stmt = null;
-    public void deleteRecord (String Date) {
 
+    /**
+     * Функция, удаляющая запись из БД.
+     *
+     * @param Date - дата расхода, идентификатор по которому удаляются записи.
+     */
+    public void deleteRecord (String Date) {
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:expenses1.db");
-            c.setAutoCommit(false);
+            c = DriverManager.getConnection("jdbc:sqlite:expenses.db");
             stmt = c.createStatement();
-            String sql = "DELETE FROM EXPENSES WHERE DATE='" + Date + "';";
-            stmt.executeUpdate(sql);
-            c.commit();
+            stmt.executeUpdate("DELETE FROM EXPENSES WHERE DATE='" + Date + "';");
             stmt.close();
             c.close();
         } catch (Exception e) {
             System.out.println(e.getClass().getName() + "; " + e.getMessage());
         } finally {
-            // finally block used to close resources
             try {
                 if (stmt != null)
                     stmt.close();
-            } catch (SQLException se2) {
+            } catch (SQLException ignored) {
             }
             try {
                 if (c != null)
@@ -34,7 +39,6 @@ public class TableClear {
                 se.printStackTrace();
             }
         }
-
         TableList tableList = new TableList();
         tableList.displayExpenses();
     }

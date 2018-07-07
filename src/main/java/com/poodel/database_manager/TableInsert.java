@@ -2,21 +2,30 @@ package com.poodel.database_manager;
 
 import java.sql.*;
 
+/**
+ * Класс-Реализация "add" - добавление в БД данных расходов.
+ */
 public class TableInsert {
 
     private Connection c = null;
     private Statement stmt = null;
 
+    /**
+     * Функция добавляющая записи в БД.
+     *
+     * @param Date - дата расхода
+     * @param Ammount - сумма расхода
+     * @param Currency - валюта расхода
+     * @param Description - описание расхода
+     */
     public void addRecord(String Date, String Ammount, String Currency, String Description) {
+
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:expenses1.db");
-            c.setAutoCommit(true);
-
+            c = DriverManager.getConnection("jdbc:sqlite:expenses.db");
             stmt = c.createStatement();
-            String sql = "INSERT INTO EXPENSES (DATE, AMOUNT, CURRENCY, DESCRIPTION)" +
-                    "VALUES ('" + Date + "', '" + Ammount + "', '" + Currency + "', '" + Description + "')";
-            stmt.executeUpdate(sql);
+            stmt.executeUpdate("INSERT INTO EXPENSES (DATE, AMOUNT, CURRENCY, DESCRIPTION)" +
+                    "VALUES ('" + Date + "', '" + Ammount + "', '" + Currency + "', '" + Description + "')");
             stmt.close();
             c.close();
 
@@ -25,11 +34,10 @@ public class TableInsert {
         } catch (Exception e) {
             System.out.println(e.getClass().getName() + "; " + e.getMessage());
         } finally {
-            // finally block used to close resources
             try {
                 if (stmt != null)
                     stmt.close();
-            } catch (SQLException se2) {
+            } catch (SQLException ignored) {
             }
             try {
                 if (c != null)
