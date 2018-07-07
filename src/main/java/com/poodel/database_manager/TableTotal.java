@@ -1,14 +1,8 @@
 package com.poodel.database_manager;
 
-import com.poodel.fixer_resourses.CurrencyType;
-import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.JSONString;
 
-import java.io.InputStream;
 import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.sql.*;
 import java.util.*;
 
@@ -17,8 +11,9 @@ public class TableTotal {
     private static final String URL_TO_SEND =
             "http://data.fixer.io/api/latest?access_key=1787cfc17beaea6bf7ba65cb4a26aebe";
 
-    private HashMap<String, Double> getRequiredCoursesFromFixer(String CUR){
-        ArrayList<String> currencys = new ArrayList<>(getAbreviatures());
+//    {EUR=1.0, PLN=4.361108, USD=1.175912, UAH=30.944113} getRequiredCoursesFromFixer WORKING PERFECT
+    private static HashMap<String, Double> getRequiredCoursesFromFixer(String CUR){
+        ArrayList<String> currencys = new ArrayList<>(getAbbreviations());
         HashMap<String, Double> jsonCur = new HashMap<>();
 
 
@@ -50,36 +45,10 @@ public class TableTotal {
 
     }
 
-    public Double getTotal(String cur) {
-        Double result = 0.0;
-        ArrayList<String> currencys = new ArrayList<>(getAbreviatures());
-        currencys.add(cur);
-        HashMap<String, Double> jsonCur = new HashMap<>();
-        HashMap<String, Double> tableCur = new HashMap<>();
-        tableCur = getCurrencys();
 
-        jsonCur = getRequiredCoursesFromFixer(cur);
-//        System.out.println(currencys);
-        double curCourse = jsonCur.get(cur);
-        try {
-
-            for (String val : currencys
-                    ) {
-                double temp = tableCur.get(val) * (curCourse / jsonCur.get(val));
-//                System.out.println(temp);
-                result += temp;
-            }
-
-        } catch (Exception e){
-            System.out.println(e.getClass().getName() +"; " + e.getMessage());
-
-        }
-        return result/2;
-    }
-
-//    [PLN, USD]
-//    {PLN=27.0, USD=1526.0}
-    public static HashSet<String> getAbreviatures(){
+    ////***********************/////
+///   [EUR, PLN, USD] = getAbbreviations WORKING PERFECT
+    public static HashSet<String> getAbbreviations(){
         HashSet<String> currencys = new HashSet<>();
         HashMap<String, Double> curAmount = new HashMap<>();
 
@@ -108,7 +77,11 @@ public class TableTotal {
         return currencys;
 
         }
-    private HashMap<String, Double> getCurrencys(){
+// _______________________________________________________
+//{EUR=2.0, PLN=2.0, USD=2.0 }getAmmountOfCurrenciesInTable WORKING PERFECT
+    ////***********************/////
+
+    private static HashMap<String, Double> getAmmountOfCurrenciesInTable(){
         HashSet<String> currencys = new HashSet<>();
         HashMap<String, Double> curAmount = new HashMap<>();
 
@@ -147,8 +120,49 @@ public class TableTotal {
         return curAmount;
     }
 
+    public Double getTotal(String cur) {
+        Double result = 0.0;
+        ArrayList<String> currencys = new ArrayList<>(getAbbreviations());
+        currencys.add(cur);
+        HashMap<String, Double> jsonCur = new HashMap<>();
+        HashMap<String, Double> tableCur = new HashMap<>();
+        tableCur = getAmmountOfCurrenciesInTable();
+
+        jsonCur = getRequiredCoursesFromFixer(cur);
+//        System.out.println(currencys);
+        double curCourse = jsonCur.get(cur);
+        try {
+
+            for (String val : currencys
+                    ) {
+                double temp = tableCur.get(val) * (curCourse / jsonCur.get(val));
+//                System.out.println(temp);
+                result += temp;
+            }
+
+        } catch (Exception e){
+            System.out.println(e.getClass().getName() +"; " + e.getMessage());
+
+        }
+        return result/2;
+    }
+///
 
     public static void main (String []d){
-        System.out.println(getAbreviatures());
+//        ArrayList<String> currencys = new ArrayList<>(getAbbreviations());
+//        System.out.println(currencys);
+//
+//        TableInsert tableInsert = new TableInsert();
+//        tableInsert.addRecord("2019-12-12", "1", "PLN", "weeed");
+        TableList tableList = new TableList();
+        tableList.displayExpenses();
+//
+//        ArrayList<String> currencys1 = new ArrayList<>(getAbbreviations());
+//        System.out.println(getAbbreviations());
+
+//        HashMap<String, Double> res = getRequiredCoursesFromFixer("UAH");
+//        System.out.println(res);
+
+
     }
 }

@@ -15,7 +15,7 @@ public class TableCreate {
             // Register JDBC driver
             Class.forName("org.sqlite.JDBC");
             // Open a connection
-            c = DriverManager.getConnection("jdbc:sqlite:expenses.db");
+            c = DriverManager.getConnection("jdbc:sqlite:expenses1.db");
             // Execute a query
             stmt = c.createStatement();
             String sql = "CREATE TABLE IF NOT EXISTS EXPENSES" +
