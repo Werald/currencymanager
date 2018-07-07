@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public abstract class AbsCommands {
+public abstract class FatherOfCommands {
 
     public abstract void execute(String inCommand);
     public abstract String[] getDataArrFromUI(String inCommand);

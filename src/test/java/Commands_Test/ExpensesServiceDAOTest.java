@@ -1,4 +1,4 @@
-package Dao_Test;
+package Commands_Test;
 
 import com.poodel.database_manager.table_entity.Expenses;
 import com.poodel.database_manager.table_entity.ExpensesServiceDAO;

@@ -2,9 +2,8 @@ package com.poodel.commands;
 
 import com.poodel.commands.command_exceptions.WrongCommandFormatException;
 import com.poodel.database_manager.TableClear;
-import com.poodel.database_manager.TableList;
 
-public class ClearCommand extends AbsCommands{
+public class ClearCommand extends FatherOfCommands {
     private static final String COMMAND_PARSER = "clear\\s[12]\\d{3}[-](([0][1-9])|([1][0-2]))[-](([0][1-9])|([12][0-9])|([3][01]))";
     private static final String ERROR_MESSAGE = "Error during execution.";
 

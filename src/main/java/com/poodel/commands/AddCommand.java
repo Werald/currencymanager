@@ -1,10 +1,9 @@
 package com.poodel.commands;
 
 import com.poodel.commands.command_exceptions.WrongCommandFormatException;
-import com.poodel.database_manager.TableCreate;
 import com.poodel.database_manager.TableInsert;
 
-public class AddCommand extends AbsCommands {
+public class AddCommand extends FatherOfCommands {
 
     private static final String COMMAND_PARSER = "add\\s[12]\\d{3}[-](([0][1-9])|([1][0-2]))[-](([0][1-9])|([12][0-9])|([3][01]))\\s\\d+(\\.[\\d]{1,2})?\\s[A-Z]{3}\\s.{3,100}";
 

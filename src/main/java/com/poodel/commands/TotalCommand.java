@@ -2,10 +2,7 @@ package com.poodel.commands;
 
 import com.poodel.database_manager.TableTotal;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
-
-public class TotalCommand extends AbsCommands {
+public class TotalCommand extends FatherOfCommands {
     private static final String COMMAND_PARSER = "[t][o][t][a][l]\\s[A-Z]{3}";
     private static final String ERROR_MESSAGE = "No expenses found.";
 
@@ -15,12 +12,7 @@ public class TotalCommand extends AbsCommands {
 
         if(checkCommand(inCommand, COMMAND_PARSER)) {
             TableTotal tableTotal = new TableTotal();
-            DecimalFormat df = new DecimalFormat("#.##");
-            df.setRoundingMode(RoundingMode.CEILING);
-            double result = tableTotal.getTotal(parsedCommand[1]);
-
-            System.out.println(df.format(result));
-
+            tableTotal.getTotal(parsedCommand[1]);
         }
 
         } catch (Exception e){

@@ -47,6 +47,5 @@ public class TableCreate {
             }
         }
 
-            System.out.println("db was created successfurry");
     }
 }
