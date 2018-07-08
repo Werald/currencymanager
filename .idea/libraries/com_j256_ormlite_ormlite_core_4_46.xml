@@ -4,11 +4,7 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/ormlite-core-4.46.jar!/" />
     </CLASSES>
-    <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/lib/ormlite-core-4.46-javadoc.jar!/" />
-    </JAVADOC>
-    <SOURCES>
-      <root url="jar://$PROJECT_DIR$/lib/ormlite-core-4.46-sources.jar!/" />
-    </SOURCES>
+    <JAVADOC />
+    <SOURCES />
   </library>
 </component>

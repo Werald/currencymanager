@@ -4,11 +4,7 @@
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/mockito-all-2.0.2-beta.jar!/" />
     </CLASSES>
-    <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/lib/mockito-all-2.0.2-beta-javadoc.jar!/" />
-    </JAVADOC>
-    <SOURCES>
-      <root url="jar://$PROJECT_DIR$/lib/mockito-all-2.0.2-beta-sources.jar!/" />
-    </SOURCES>
+    <JAVADOC />
+    <SOURCES />
   </library>
 </component>

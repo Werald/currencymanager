@@ -25,6 +25,7 @@ public class ClearCommand extends FatherOfCommands {
                 throw new WrongFormatOfCommandException(ERROR_MESSAGE);
             }
         } catch (WrongFormatOfCommandException e){
+            System.out.println(ERROR_MESSAGE);
 //            System.out.println(e.getClass().getName() + "; " + e.getMessage());
         }
     }

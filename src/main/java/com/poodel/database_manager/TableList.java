@@ -30,7 +30,7 @@ public class TableList {
                 System.out.println(date);
                 ResultSet rs1 = stmt.executeQuery("SELECT * FROM EXPENSES  WHERE DATE='"+date+"'ORDER BY DATE;");
                 while (rs1.next()) {
-                    System.out.print( rs1.getString("DESCRIPTION") + " "
+                    System.out.print( rs1.getString("DESCRIPTION").replace("\"", "") + " "
                                     + rs1.getDouble("AMOUNT") + " "
                                     + rs1.getString("CURRENCY") + "\n");
                 }
