@@ -1,0 +1,6 @@
+
+com.poodel
+com.poodel.commands
+com.poodel.commands.command_exceptions
+com.poodel.commands.commands_implementation
+com.poodel.database_manager

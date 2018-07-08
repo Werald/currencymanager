@@ -5,9 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.poodel</groupId>
-    <artifactId>currency-manager</artifactId>
-    <version>1.0-SNAPSHOT</version>
-
+    <artifactId>expenses-manager</artifactId>
+    <version>1.488</version>
 
     <dependencies>
         <dependency>
@@ -15,41 +14,54 @@
             <artifactId>junit</artifactId>
             <version>4.11</version>
         </dependency>
-
         <dependency>
             <groupId>com.j256.ormlite</groupId>
             <artifactId>ormlite-core</artifactId>
-            <version>4.47</version>
+            <version>5.1</version>
         </dependency>
-
-
         <dependency>
             <groupId>com.j256.ormlite</groupId>
             <artifactId>ormlite-jdbc</artifactId>
-            <version>4.47</version>
+            <version>5.1</version>
         </dependency>
-
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.7.2</version>
         </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20140107</version>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.mockito</groupId>-->
+            <!--<artifactId>mockito-all</artifactId>-->
+            <!--<version>2.0.2-beta</version>-->
+        <!--</dependency>-->
 
     </dependencies>
-
-
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
                 <configuration>
                     <source>7</source>
                     <target>7</target>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
         </plugins>
+
+        <testResources>
+            <testResource>
+                <directory>${basedir}/src/main/java/com/poodel/commands/commands_implementation/unit_tests_commands</directory>
+            </testResource>
+        </testResources>
+
     </build>
 
 

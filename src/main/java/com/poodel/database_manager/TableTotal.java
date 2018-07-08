@@ -16,16 +16,16 @@ import java.util.Scanner;
 public class TableTotal {
 
     /**
-     * @param URL_TO_SEND -  Ссылка, тело которой идёт с GET-запросом и API-key.
+     * @param URL_TO_SEND -  Ссылка с GET-запросом, API-key и форматированием.
      */
-    private static final String URL_TO_SEND ="http://data.fixer.io/api/latest?access_key=1787cfc17beaea6bf7ba65cb4a26aebe";
+    private static final String URL_TO_SEND ="http://data.fixer.io/api/latest?access_key=1787cfc17beaea6bf7ba65cb4a26aebe&format=1";
 
     /**
      * Функция для получения курсов валют через HTTP-запрос у @link{fixer.io} и парсинга JSON-обьекта с актуальными курсами.
      *
      * @param baseCurrency - валюта, к которой производится финальное приведение расходов (задается пользователем)
-     * @return - HashMap<ВАЛЮТА, КУРС>
-     * example of returned statement: {EUR=1.0, PLN=4.361108, USD=1.175912, UAH=30.944113}
+     * @return коллекция HashMap<ВАЛЮТА, КУРС>
+     * Output: (~50% match) {EUR=1.0, PLN=4.361108, USD=1.175912, UAH=30.944113}
      */
     private HashMap<String, Double> getRequiredCoursesFromFixer(String baseCurrency) {
         ArrayList<String> currencys = new ArrayList<>(getAbbreviationsOfCurrenciesInTable());
@@ -54,8 +54,8 @@ public class TableTotal {
     /**
      * Функция для сбора всех типов задействованных в расходах валют.
      *
-     * @return - коллекция уникальных значений аббревиатур валют из БД.
-     * example: [EUR, PLN, USD]
+     * @return коллекция уникальных значений аббревиатур валют из БД.
+     * Output: (~50% match) [EUR, PLN, USD]
      */
     private HashSet<String> getAbbreviationsOfCurrenciesInTable() {
 
@@ -96,7 +96,8 @@ public class TableTotal {
     /**
      * Функция собирающая в коллекцию уникальные пары (Валюта)-(Сумма_расходов).
      *
-     * @return - HashMap<Валюта, Количество_расходов_в_ЭТОЙ_валюте>. example: {EUR=2.0, PLN=2.0, USD=2.0 }
+     * @return коллекция HashMap<Валюта, Количество_расходов_в_ЭТОЙ_валюте>.
+     * Output: (~50% match) {EUR=2.0, PLN=2.0, USD=2.0 }
      */
     private HashMap<String, Double> getAmmountOfCurrenciesInTable() {
         HashSet<String> currencys = new HashSet<>();
@@ -146,11 +147,10 @@ public class TableTotal {
 
 
     /**
-     * Функция, производящая обработку результатов всех методов класса и подсчетом коэфициента для приведения
-     * всех валют из БД к единой валюте-знаменателю 'baseCurrency', результат округляется до 2х знаков после запятой
-     * и выводится в консоль.
+     * Функция, выполняющая приведение всех валют из БД к валюте-знаменателю 'baseCurrency',
+     * результат округляется до 2х знаков после запятой и выводится в консоль.
      *
-     * @param baseCurrency - валюта, к которой производится общее приведение(задается пользователем)
+     * @param baseCurrency валюта, к которой производится общее приведение(задается пользователем)
      */
     public void countTotal(String baseCurrency) {
 
@@ -171,8 +171,11 @@ public class TableTotal {
 
         DecimalFormat df = new DecimalFormat("#.##");
         df.setRoundingMode(RoundingMode.CEILING);
-        System.out.println(df.format(result)+ " " + baseCurrency);
+        System.out.println(df.format(result)+ " " + baseCurrency +"\n");
     }
-}
+
+} /* Output:
+5.42 EUR
+*///:~
 
 

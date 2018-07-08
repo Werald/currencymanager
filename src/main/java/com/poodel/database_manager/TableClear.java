@@ -3,8 +3,9 @@ package com.poodel.database_manager;
 import java.sql.*;
 
 /**
- * Реализация команды "clear", инициируемая классом commands_implementation.ClearCommand
- * Инстанс класса производит удаление запис(и)-ей из БД, связанных одним значением Date
+ * Реализация команды "clear", инициируемая классом
+ * @see com.poodel.commands.commands_implementation.ClearCommand
+ * Истанс класса производит удаление запис(и)-ей из БД, связанных одним значением Date
  */
 public class TableClear {
 
@@ -14,7 +15,7 @@ public class TableClear {
     /**
      * Функция, удаляющая запись из БД.
      *
-     * @param Date - дата расхода, идентификатор по которому удаляются записи.
+     * @param Date дата расхода, идентификатор по которому удаляются записи.
      */
     public void deleteRecord (String Date) {
         try {

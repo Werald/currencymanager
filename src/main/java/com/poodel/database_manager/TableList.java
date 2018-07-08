@@ -12,6 +12,9 @@ public class TableList {
     private Statement stmt = null;
 
 
+    /**
+     * Функция, отображающая все записи в БД
+     */
     public void displayExpenses(){
 
         try {
@@ -55,6 +58,15 @@ public class TableList {
             }
         }
     }
-}
+} /* Output:
+2017-04-25
+        Jogurt 2 USD
+        French Fries 3 EUR
+        2017-04-26
+        Sweets 2.5 PLN
+        2017-04-27
+        Beer 4.75 EUR
+*///:~
+
 
 

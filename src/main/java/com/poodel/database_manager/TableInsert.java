@@ -13,10 +13,10 @@ public class TableInsert {
     /**
      * Функция добавляющая записи в БД.
      *
-     * @param Date - дата расхода
-     * @param Ammount - сумма расхода
-     * @param Currency - валюта расхода
-     * @param Description - описание расхода
+     * @param Date дата расхода
+     * @param Ammount сумма расхода
+     * @param Currency валюта расхода
+     * @param Description описание расхода
      */
     public void addRecord(String Date, String Ammount, String Currency, String Description) {
 
@@ -47,4 +47,12 @@ public class TableInsert {
             }
         }
     }
-}
+}/* Output:
+        2017-04-25
+        Jogurt 2 USD
+        French Fries 3 EUR
+        2017-04-26
+        Sweets 2.5 PLN
+        2017-04-27
+        Beer 4.75 EUR
+*///:~

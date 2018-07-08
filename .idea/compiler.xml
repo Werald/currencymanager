@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="currency-manager" />
+        <module name="expenses-manager" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="expenses-manager" target="7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
