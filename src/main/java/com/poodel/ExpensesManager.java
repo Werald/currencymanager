@@ -14,7 +14,7 @@ import java.util.Scanner;
  * Provides managing of personal expenses using basic command-line operations (add, list, clear, total).
  * @author Alex Che Poodel
  * @author chealexpud@gmail.com
- * @version 1.488
+ * @version 0.9
  */
 public class ExpensesManager {
     private static final String ERROR_MESSAGE = "Error! Command not found!";
@@ -26,7 +26,7 @@ public class ExpensesManager {
             "- exit  -  finish application\n\n" +
             " \t List of used shortcuts: \n" +
             "'yyyy-mm-dd' - (2018-07-08) date format \n" +
-            "'xxxx' - (14.88), amount of expense \n" +
+            "'xxxx' - (14), amount of expense \n" +
             "'CUR' - (USD) currency \n" +
             "'description' - (Yogurt) expense description \n";
     private AddCommand addCommand = new AddCommand();
