@@ -7,8 +7,6 @@ import java.sql.*;
  */
 public class TableInsert {
 
-    private Connection c = null;
-    private Statement stmt = null;
 
     /**
      * Функция добавляющая записи в БД.
@@ -20,10 +18,10 @@ public class TableInsert {
      */
     public void addRecord(String Date, String Ammount, String Currency, String Description) {
 
-        try {
+        try(Connection c = DriverManager.getConnection("jdbc:sqlite:expenses.db")) {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:expenses.db");
-            stmt = c.createStatement();
+
+            Statement stmt = c.createStatement();
             stmt.executeUpdate("INSERT INTO EXPENSES (DATE, AMOUNT, CURRENCY, DESCRIPTION)" +
                     "VALUES ('" + Date + "', '" + Ammount + "', '" + Currency + "', '" + Description + "')");
             stmt.close();
@@ -33,18 +31,6 @@ public class TableInsert {
             tableList.displayExpenses();
         } catch (Exception e) {
             System.out.println(e.getClass().getName() + "; " + e.getMessage());
-        } finally {
-            try {
-                if (stmt != null)
-                    stmt.close();
-            } catch (SQLException ignored) {
-            }
-            try {
-                if (c != null)
-                    c.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
         }
     }
 }/* Output:

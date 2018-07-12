@@ -15,13 +15,11 @@ public class TableCreate {
      * Метод, создающий и размечающий БД
      */
     public static void createTable(){
-        Connection c = null;
-        Statement stmt = null;
 
-        try {
+        try(Connection c = DriverManager.getConnection("jdbc:sqlite:expenses.db");
+        ) {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:expenses.db");
-            stmt = c.createStatement();
+            Statement stmt = c.createStatement();
             stmt.executeUpdate("CREATE TABLE IF NOT EXISTS EXPENSES" +
                     "(ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ," +
                     "DATE DATE NOT NULL, " +
@@ -29,22 +27,8 @@ public class TableCreate {
                     "CURRENCY VARCHAR(3) NOT NULL," +
                     "DESCRIPTION VARCHAR NOT NULL)");
             stmt.close();
-            c.close();
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-        }
-        finally {
-            try {
-                if (stmt != null)
-                    stmt.close();
-            } catch (SQLException ignored) {
-            }
-            try {
-                if (c != null)
-                    c.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
         }
     }
 }

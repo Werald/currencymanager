@@ -2,6 +2,7 @@ package com.poodel.database_manager;
 
 import org.json.JSONObject;
 import java.math.RoundingMode;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.*;
 import java.text.DecimalFormat;
@@ -27,12 +28,11 @@ public class TableTotal {
      * @return коллекция HashMap<ВАЛЮТА, КУРС>
      * Output: (~50% match) {EUR=1.0, PLN=4.361108, USD=1.175912, UAH=30.944113}
      */
-    private HashMap<String, Double> getRequiredCoursesFromFixer(String baseCurrency) {
+    private HashMap<String, Double> getRequiredCoursesFromFixer(String baseCurrency) throws MalformedURLException {
         ArrayList<String> currencys = new ArrayList<>(getAbbreviationsOfCurrenciesInTable());
         HashMap<String, Double> jsonCur = new HashMap<>();
-        try {
-            URL url = new URL(URL_TO_SEND);
-            Scanner scan = new Scanner(url.openStream());
+        URL url = new URL(URL_TO_SEND);
+        try(Scanner scan = new Scanner(url.openStream())) {
             StringBuilder str = new StringBuilder();
 
             while (scan.hasNext())
@@ -61,34 +61,19 @@ public class TableTotal {
 
         HashSet<String> currencys = new HashSet<>();
 
-        Connection c = null;
-        Statement stmt = null;
-        try {
+
+        try(Connection c = DriverManager.getConnection("jdbc:sqlite:expenses.db");
+        ) {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:expenses.db");
-            stmt = c.createStatement();
+            Statement stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT CURRENCY FROM EXPENSES;");
             while (rs.next()) {
                 currencys.add(rs.getString("CURRENCY"));
             }
             rs.close();
             stmt.close();
-            c.close();
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-        }
-        finally {
-            try {
-                if (stmt != null)
-                    stmt.close();
-            } catch (SQLException ignored) {
-            }
-            try {
-                if (c != null)
-                    c.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
         }
         return currencys;
     }
@@ -103,12 +88,10 @@ public class TableTotal {
         HashSet<String> currencys = new HashSet<>();
         HashMap<String, Double> curAmount = new HashMap<>();
 
-        Connection c = null;
-        Statement stmt = null;
-        try {
+        try(Connection c = DriverManager.getConnection("jdbc:sqlite:expenses.db");
+        ) {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:expenses.db");
-            stmt = c.createStatement();
+            Statement stmt = c.createStatement();
 
             ResultSet rs = stmt.executeQuery("SELECT CURRENCY FROM EXPENSES;");
             while (rs.next()) {
@@ -125,22 +108,8 @@ public class TableTotal {
                 result.close();
             }
             stmt.close();
-            c.close();
         } catch (Exception e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-        }
-        finally {
-            try {
-                if (stmt != null)
-                    stmt.close();
-            } catch (SQLException ignored) {
-            }
-            try {
-                if (c != null)
-                    c.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
         }
         return curAmount;
     }
@@ -152,7 +121,7 @@ public class TableTotal {
      *
      * @param baseCurrency валюта, к которой производится общее приведение(задается пользователем)
      */
-    public void countTotal(String baseCurrency) {
+    public void countTotal(String baseCurrency) throws MalformedURLException {
 
         TableTotal tableTotal = new TableTotal();
         ArrayList<String> shortCur = new ArrayList<>(tableTotal.getAbbreviationsOfCurrenciesInTable());

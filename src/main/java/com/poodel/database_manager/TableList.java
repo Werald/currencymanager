@@ -8,19 +8,15 @@ import java.util.ArrayList;
  */
 public class TableList {
 
-    private Connection c = null;
-    private Statement stmt = null;
-
 
     /**
      * Функция, отображающая все записи в БД
      */
     public void displayExpenses(){
 
-        try {
+        try(Connection c = DriverManager.getConnection("jdbc:sqlite:expenses.db")) {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:expenses.db");
-            stmt = c.createStatement();
+            Statement stmt = c.createStatement();
 
             ArrayList<String> dates = new ArrayList<>();
             ResultSet rs = stmt.executeQuery("SELECT * FROM EXPENSES GROUP BY DATE; ");
@@ -41,21 +37,9 @@ public class TableList {
                 System.out.println();
             }
             stmt.close();
-            c.close();
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-        } finally {
-            try {
-                if (stmt != null)
-                    stmt.close();
-            } catch (SQLException ignored) {
-            }
-            try {
-                if (c != null)
-                    c.close();
-            } catch (SQLException se) {
-                se.printStackTrace();
-            }
+
         }
     }
 } /* Output:
