@@ -31,8 +31,6 @@ public class TotalCommand extends FatherOfCommands {
         } catch (WrongFormatOfCommandException e){
             System.out.println(ERROR_MESSAGE);
 //            System.out.println(e.getClass().getName() + "; " + e.getMessage());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         }
     }
 
