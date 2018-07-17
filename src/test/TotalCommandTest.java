@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
  * @see ClearCommand
  */
 public class TotalCommandTest extends FatherOfCommands {
-    private static final String COMMAND_PARSER = "[t][o][t][a][l]\\s[A-Z]{3}";
+    private static final String COMMAND_PARSER = "total\\s[A-Z]{3}";
 
     @Test
     public void testExecute() {

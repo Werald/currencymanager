@@ -12,7 +12,7 @@ public class TotalCommand extends FatherOfCommands {
     /**
      * @param COMMAND_PARSER шаблон RegExp, хранящий формат поступаемой команды.
      */
-    private static final String COMMAND_PARSER = "[t][o][t][a][l]\\s[A-Z]{3}";
+    private static final String COMMAND_PARSER = "total\\s[A-Z]{3}";
     private static final String ERROR_MESSAGE = "\nWrong signature of command!\nUse following format for alignment to chosen currency: \n \"total CUR\"\n";
 
     public void execute(String inCommand)  {
