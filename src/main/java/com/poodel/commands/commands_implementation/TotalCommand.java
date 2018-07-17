@@ -4,13 +4,10 @@ import com.poodel.commands.FatherOfCommands;
 import com.poodel.commands.command_exceptions.WrongFormatOfCommandException;
 import com.poodel.database_manager.TableTotal;
 
-import java.net.MalformedURLException;
-
 /**
  * Реализация парсинга и проверки команды "total"
  */
 public class TotalCommand extends FatherOfCommands {
-
 
     /**
      * @param COMMAND_PARSER шаблон RegExp, хранящий формат поступаемой команды.

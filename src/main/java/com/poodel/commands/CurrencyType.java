@@ -1,5 +1,6 @@
 package com.poodel.commands;
 
+
 /**
  * Перечисление всех доступных аббревиатур валют на сайте fixer.io
  */
@@ -196,4 +197,7 @@ public enum CurrencyType {
      * Поле класса Аббревиатура.
      */
     private String abbreviation;
+
+
+
 }

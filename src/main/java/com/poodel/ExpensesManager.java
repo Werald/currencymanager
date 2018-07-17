@@ -9,6 +9,7 @@ import com.poodel.database_manager.TableCreate;
 import java.lang.invoke.WrongMethodTypeException;
 import java.util.Scanner;
 
+
 /**
  * <b>Expenses Manager</b>.
  * Provides managing of personal expenses using basic command-line operations (add, list, clear, total).
@@ -29,6 +30,8 @@ public class ExpensesManager {
             "'xxxx' - (14), amount of expense \n" +
             "'CUR' - (USD) currency \n" +
             "'description' - (Yogurt) expense description \n";
+
+
     private AddCommand addCommand = new AddCommand();
     private ListCommand listCommand = new ListCommand();
     private ClearCommand clearCommand = new ClearCommand();
@@ -38,19 +41,18 @@ public class ExpensesManager {
      * Entry point to class and application.
      * @param args array of string arguments
      */
-    public static void main (String[] args) {
-
+    public static void main (String[] args) throws ClassNotFoundException {
+        Class.forName("org.sqlite.JDBC");
         System.out.println(START_MESSAGE);
         TableCreate.createTable();
 
-           do {
-               Scanner scanner = new Scanner(System.in);
-               String enteredCommand = scanner.nextLine();
+        while (true) {
+            Scanner scanner = new Scanner(System.in);
+            String enteredCommand = scanner.nextLine();
 
-               ExpensesManager sd = new ExpensesManager();
-               sd.commandIdentification(enteredCommand);
-           } while (true);
-
+            ExpensesManager sd = new ExpensesManager();
+            sd.commandIdentification(enteredCommand);
+        }
     }
 
 
@@ -64,6 +66,7 @@ public class ExpensesManager {
         String[] commandSubStr = enteredCommand.split("\\s");
 
         try{
+
         switch (commandSubStr[0]) {
             case "add":
                 addCommand.execute(enteredCommand);
@@ -83,7 +86,7 @@ public class ExpensesManager {
             default: throw new WrongMethodTypeException(ERROR_MESSAGE);
         }
          } catch (WrongMethodTypeException e){
-            System.out.println(START_MESSAGE);
+            System.out.println(ERROR_MESSAGE + "\n" + START_MESSAGE);
         }
     }
 }

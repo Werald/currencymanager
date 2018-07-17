@@ -16,8 +16,8 @@ public class TableCreate {
     public static void createTable() {
 
         try ( Connection c = DriverManager.getConnection("jdbc:sqlite:expenses.db");
-              Statement stmt = c.createStatement()) {
-
+              Statement stmt = c.createStatement()
+        ) {
             stmt.executeUpdate("CREATE TABLE IF NOT EXISTS EXPENSES" +
                     "(ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ," +
                     "DATE DATE NOT NULL, " +

@@ -14,8 +14,8 @@ public class TableList {
     public void displayExpenses(){
 
         try(Connection c = DriverManager.getConnection("jdbc:sqlite:expenses.db");
-            Statement stmt = c.createStatement()) {
-
+            Statement stmt = c.createStatement()
+        ) {
             ArrayList<String> dates = new ArrayList<>();
 
             ResultSet rs = stmt.executeQuery("SELECT * FROM EXPENSES GROUP BY DATE; ");
