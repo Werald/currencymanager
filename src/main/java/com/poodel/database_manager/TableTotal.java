@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class TableTotal {
 
     /**
-     * Функция для получения курсов валют через HTTP-запрос у @link{fixer.io} и парсинга JSON-обьекта с актуальными курсами.
+     * Функция для получения нужных курсов валют через HTTP-запрос у @link{fixer.io} и парсинга JSON-обьекта с актуальными курсами.
      *
      * @param baseCurrency - валюта, к которой производится финальное приведение расходов (задается пользователем)
      * @return коллекция HashMap<ВАЛЮТА, КУРС>
@@ -25,8 +25,9 @@ public class TableTotal {
      */
     private HashMap<String, Double> getRequiredCoursesFromFixer(String baseCurrency) {
 
-        StringBuilder URL_TO_SEND = new StringBuilder("http://data.fixer.io/api/latest?access_key=1787cfc17beaea6bf7ba65cb4a26aebe&symbols="+baseCurrency+",");
+        StringBuilder URL_TO_SEND = new StringBuilder("http://data.fixer.io/api/latest?access_key=1787cfc17beaea6bf7ba65cb4a26aebe&symbols=");
         ArrayList<String> currencies = new ArrayList<>(getAbbreviationsOfCurrenciesInTable());
+        currencies.add(baseCurrency);
         for (String cur: currencies) {
             URL_TO_SEND.append(cur).append(",");
         }
@@ -35,17 +36,22 @@ public class TableTotal {
             URL url = new URL(URL_TO_SEND.toString());
             Scanner scan = new Scanner(url.openStream());
             StringBuilder str = new StringBuilder();
-
             while (scan.hasNext())
                 str.append(scan.nextLine());
             scan.close();
 
             JSONObject obj = new JSONObject(str.toString());
-            JSONObject res = obj.getJSONObject("rates");
-            for (String currency : currencies) {
-                jsonCur.put(currency, new Double(String.valueOf(res.getDouble(currency))));
+            Boolean isSuccess = obj.getBoolean("success");
+            if(isSuccess){
+                JSONObject res = obj.getJSONObject("rates");
+                for (String currency : currencies) {
+                    jsonCur.put(currency, new Double(String.valueOf(res.getDouble(currency))));
+                }
+            } else {
+                JSONObject error = obj.getJSONObject("error");
+                System.out.println("Bad request to fixer.io! \n error code: " + error.getInt("code") + " - "+
+                error.getString("info"));
             }
-            jsonCur.put(baseCurrency, new Double(String.valueOf(res.getDouble(baseCurrency))));
         } catch (Exception e) {
             e.printStackTrace();
         }
