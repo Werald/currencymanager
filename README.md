@@ -1,7 +1,7 @@
 # Currency Manager
 Application provides managing of personal expenses using basic command-line operations.
 
-> Unit-tests are located at [com.poodel.commands.commands_implementation.unit_tests_commands](https://github.com/Werald/currencymanager/tree/master/src/main/java/com/poodel/commands/commands_implementation/unit_tests_commands) 
+> Unit-tests are located at `src.test`
 folder of project and included to Maven build-properties.
 
 ## How to build, test and run 

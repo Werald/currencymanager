@@ -2,7 +2,8 @@ import com.poodel.commands.FatherOfCommands;
 import com.poodel.commands.commands_implementation.ClearCommand;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Unit-test для щаблона команды list.

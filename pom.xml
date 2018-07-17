@@ -31,11 +31,11 @@
             </plugin>
         </plugins>
 
-        <testSourceDirectory>${basedir}/src/main/java/com/poodel/commands/commands_implementation/unit_tests_commands</testSourceDirectory>
+        <testSourceDirectory>${basedir}/src/test</testSourceDirectory>
 
         <testResources>
             <testResource>
-                <directory>${basedir}/src/main/java/com/poodel/commands/commands_implementation/unit_tests_commands</directory>
+                <directory>${basedir}/src/test</directory>
             </testResource>
         </testResources>
 
