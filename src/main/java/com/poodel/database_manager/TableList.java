@@ -1,6 +1,9 @@
 package com.poodel.database_manager;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -11,7 +14,7 @@ public class TableList {
     /**
      * Функция, отображающая все записи в БД
      */
-    public void displayExpenses(){
+    public static void displayExpenses(){
 
         try(Connection c = DriverManager.getConnection("jdbc:sqlite:expenses.db");
             Statement stmt = c.createStatement()

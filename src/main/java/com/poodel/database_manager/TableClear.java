@@ -22,7 +22,6 @@ public class TableClear {
         } catch (Exception e) {
             System.out.println(e.getClass().getName() + "; " + e.getMessage());
         }
-        TableList tableList = new TableList();
-        tableList.displayExpenses();
+        TableList.displayExpenses();
     }
 }

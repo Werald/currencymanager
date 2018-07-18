@@ -22,8 +22,7 @@ public class TableInsert {
         ) {
              stmt.executeUpdate("INSERT INTO EXPENSES (DATE, AMOUNT, CURRENCY, DESCRIPTION)" +
                     "VALUES ('" + Date + "', '" + Ammount + "', '" + Currency + "', '" + Description + "')");
-            TableList tableList = new TableList();
-            tableList.displayExpenses();
+            TableList.displayExpenses();
 
         } catch (Exception e) {
             System.out.println(e.getClass().getName() + "; " + e.getMessage());

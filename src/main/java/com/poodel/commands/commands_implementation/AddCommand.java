@@ -13,7 +13,8 @@ public class AddCommand extends FatherOfCommands {
     /**
      * @param COMMAND_PARSER шаблон RegExp, хранящий формат поступаемой команды.
      */
-    private static final String COMMAND_PARSER = "add\\s[12]\\d{3}[-](([0][1-9])|([1][0-2]))[-](([0][1-9])|([12][0-9])|([3][01]))\\s\\d+(\\.[\\d]{1,2})?\\s[A-Z]{3}\\s.{3,100}";
+    private static final String COMMAND_PARSER = "add\\s[12]\\d{3}[-](([0][1-9])|([1][0-2]))[-](([0][1-9])|([12][0-9])|([3][01]))\\s" +
+            "\\d+(\\.[\\d]{1,2})?\\s[A-Z]{3}\\s.{3,100}";
     private static final String ERROR_MESSAGE = "\nWrong signature of command!\nUse following format for adding expense record: \n \"add yyyy-mm-dd xxxx CUR description\"\n ";
 
     public void execute(String inCommand) {

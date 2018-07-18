@@ -32,6 +32,10 @@ mvn clean install exec:java
 ```
    > total PLN
 ```
+##### Get list of all available currencies:
+```
+    > curlist
+```    
 ##### Finish execution of application
 ```
    > exit

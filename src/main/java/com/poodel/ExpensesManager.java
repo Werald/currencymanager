@@ -87,9 +87,9 @@ public class ExpensesManager {
             case "curlist":
                 int i=0;
                 for (CurrencyType currencyType: CurrencyType.values()) {
-                    System.out.print(currencyType + ", \t");
+                    System.out.print(currencyType + "\t");
                     i++;
-                    if (i%7==0){
+                    if (i%11==0){
                         System.out.println();
                     }
                 }

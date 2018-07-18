@@ -17,9 +17,8 @@ public class ListCommand extends FatherOfCommands {
     public void execute(String inCommand) {
         try {
             if (checkCommand(inCommand, COMMAND_PARSER)){
-                TableList tableList = new TableList();
                 System.out.println();
-                tableList.displayExpenses();
+                TableList.displayExpenses();
             } else {
                 throw new WrongFormatOfCommandException(ERROR_MESSAGE);
             }

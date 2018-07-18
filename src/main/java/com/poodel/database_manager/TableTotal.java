@@ -26,7 +26,7 @@ public class TableTotal {
     private HashMap<String, Double> getRequiredCoursesFromFixer(String baseCurrency) {
 
         StringBuilder URL_TO_SEND = new StringBuilder("http://data.fixer.io/api/latest?access_key=1787cfc17beaea6bf7ba65cb4a26aebe&symbols=");
-        ArrayList<String> currencies = new ArrayList<>(getAbbreviationsOfCurrenciesInTable());
+        ArrayList<String> currencies = new ArrayList<>(getCurAbbreviationsOfExpenses());
         currencies.add(baseCurrency);
         for (String cur: currencies) {
             URL_TO_SEND.append(cur).append(",");
@@ -64,7 +64,7 @@ public class TableTotal {
      * @return коллекция уникальных значений аббревиатур валют из БД.
      * Output: (~50% match) [EUR, PLN, USD]
      */
-    private HashSet<String> getAbbreviationsOfCurrenciesInTable() {
+    private HashSet<String> getCurAbbreviationsOfExpenses() {
 
         HashSet<String> currencys = new HashSet<>();
         try( Connection c = DriverManager.getConnection("jdbc:sqlite:expenses.db");
@@ -87,9 +87,9 @@ public class TableTotal {
      * @return коллекция HashMap<Валюта, Количество_расходов_в_ЭТОЙ_валюте>.
      * Output: (~50% match) {EUR=2.0, PLN=2.0, USD=2.0 }
      */
-    private HashMap<String, Double> getAmmountOfCurrenciesInTable() {
+    private HashMap<String, Double> getAmountOfExpenses() {
 
-        HashSet<String> currencys = new HashSet<>();
+        HashSet<String> currencies = new HashSet<>();
         HashMap<String, Double> curAmount = new HashMap<>();
 
         try (Connection c = DriverManager.getConnection("jdbc:sqlite:expenses.db");
@@ -98,11 +98,11 @@ public class TableTotal {
 
             ResultSet rs = stmt.executeQuery("SELECT CURRENCY FROM EXPENSES;");
             while (rs.next()) {
-                currencys.add(rs.getString("CURRENCY"));
+                currencies.add(rs.getString("CURRENCY"));
             }
             rs.close();
 
-            for (String str : currencys) {
+            for (String str : currencies) {
                 PreparedStatement statement = c.prepareStatement("SELECT SUM(AMOUNT) FROM EXPENSES WHERE CURRENCY='" + str + "';");
                 ResultSet result = statement.executeQuery();
                 while (result.next()) {
@@ -125,14 +125,14 @@ public class TableTotal {
      */
     public void countTotal(String baseCurrency) {
 
-        ArrayList<String> shortCur = new ArrayList<>(getAbbreviationsOfCurrenciesInTable());
-        HashMap<String, Double> amountOfCur = new HashMap<>(getAmmountOfCurrenciesInTable());
+        ArrayList<String> abbrevOfCur = new ArrayList<>(getCurAbbreviationsOfExpenses());
+        HashMap<String, Double> amountOfExpenses = new HashMap<>(getAmountOfExpenses());
         HashMap<String, Double> coursesOfCur = new HashMap<>(getRequiredCoursesFromFixer(baseCurrency));
         ArrayList<Double> result4Each = new ArrayList<>();
         double result = 0.0;
 
-        for (String curAbbrevFromTable : shortCur) {
-            result4Each.add((amountOfCur.get(curAbbrevFromTable) *
+        for (String curAbbrevFromTable : abbrevOfCur) {
+            result4Each.add((amountOfExpenses.get(curAbbrevFromTable) *
                     (coursesOfCur.get(baseCurrency) / coursesOfCur.get(curAbbrevFromTable))));
         }
         for (double amount : result4Each) {
